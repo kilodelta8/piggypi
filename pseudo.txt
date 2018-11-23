@@ -1,0 +1,13 @@
+On Start...
+    read sensor State -->for each sensor
+    display sensor states
+    initialize camera
+    display camera
+    repeat every hour
+if Water sensor State false (empty/low)
+    notify to Water(tweet/email/text/etc)
+        or actuate solenoid to fill Water
+        if Water solenoid true (filling)
+            repeat until Water sensor State true
+else if Water sensor State true (full)
+    recheck in 1 hour

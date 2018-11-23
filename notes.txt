@@ -1,0 +1,16 @@
+Classes to develop
+=======================================
+cage?
+  -
+water sensor
+  -One or Two?
+  -state (on/off=full/empty)
+food sensor
+  -One or Two?
+  -state (on/off=full/empty)
+camera
+  -state?
+
+=======================================
+Rpi GUI?
+Android App
