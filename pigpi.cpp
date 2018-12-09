@@ -15,13 +15,15 @@ using namespace std;
 //number of pins being used<---not sure this is the right way to do it
 const int NUMofPINS = 2;
 //time constant for do-while
-const unsigned int TIMECOUNT = 3600000;
+const unsigned int TIMECOUNT = 3600000;//<----one hour
+const unsigned int TIMECOUNTMAX = 86,400,000;//<----one day
 
 
 /*MAIN<------------------------------------>MAIN*/
 int main(){
     //variables
     int priorityNum, setupNum, pinOne, pinTwo;
+    unsigned int timeSinceStart = 0, timeSinceLastRun = 0;
     //initialize data file object
     ofstream dataFile;
 
@@ -40,7 +42,7 @@ int main(){
     }
 
     //set gpio pins
-    setupNum = wiringPiSetup(void);
+    setupNum = wiringPiSetup();
     if (setupNum == 0){
         break;
     }else if (setupNum != 0){
@@ -56,16 +58,23 @@ int main(){
         }
     }
 
+    //start a count of time since starting program?
+    timeSinceStart = millis();//<--will this work here or parallel loop?
+
     //main loop to keep checking pin state
     do{
         //reads pin state
-        pinOne = digitalRead(1);
-        pinTwo = digitalRead(2);
+        pinOne = digitalRead(1);//<---is this the right pin?
+        pinTwo = digitalRead(2);//<---or.....????
         //based on pin state, turn other pin on or off
         if (pinOne == 0){
             break;//<----------if water level is good then skip and wait
         }else if (pinOne == 1){
-            //make pin 2 turn on to let water flow
+            //make pin 2 turn on to let water flow until pinOne reads True/full
+            while (pinOne == 0){
+                digitalWrite(2, HIGH);//<---turn water solenoid on until pinOne reads true
+            }
+            digitalWrite(2, LOW);//<----turn water solenoid off
         }
 
         //add data to dataFile
@@ -79,16 +88,10 @@ int main(){
         
         //wait one hour
         delay(TIMECOUNT);//<-----waits an hour before restarting loop
-        //need to find a way to break the loop, maybe after X amount of time?
-    }while();
- 
 
-    //read water sensor
-    //if water sensor false
-        //solenoid gpio true until sensor true
-        //solenoid sensor false
-    //repeat every hour
-    //end
+        //need to find a way to break the loop, maybe after X amount of time? Line #62
+    }while(timeSinceStart != TIMECOUNTMAX);
+ 
 
     return 0;
 }
