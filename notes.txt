@@ -1,4 +1,7 @@
-Classes to develop
+Use at compile;
+    -I/usr/local/include -L/usr/local/lib -lwiringPi
+
+Classes to develop -- Should this even contain classes???????
 =======================================
 cage?
   -
@@ -10,7 +13,15 @@ food sensor
   -state (on/off=full/empty)
 camera
   -state?
-
+PSEUDO==========PSEUDO===========PSEUDO
+init variables
+setup gpio pins
+read sensor state
+set sensor state appropriately (true or false based off of ...)
+if Xtime lapsed and sensor Xstate
+    feed or water
+    record occurrence(s)
+repeat until stop
 =======================================
 Rpi GUI?
 Android App

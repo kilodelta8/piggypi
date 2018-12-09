@@ -1,13 +1,26 @@
+
+
+
+PSEUDO==========PSEUDO===========PSEUDO
+Xint piHiPri(int priority);//<--------------------set program to high priority
 On Start...
-    read sensor State -->for each sensor
+    Xinit variables
+Xint wiringPiSetup(void);//<----------------------set gpio pins
+void pinMode(int pin, int mode);//<--------------set pins to in/out mode
+    int digitalRead(int pin);//<-----------------read sensor State -->for each sensor
     display sensor states
-    initialize camera
-    display camera
+void digitalWrite(int pin, int value);//<--------set sensor state appropriately
     repeat every hour
-if Water sensor State false (empty/low)
+if Water sensor State false (empty/low)--if Xtime lapsed and sensor Xstate
     notify to Water(tweet/email/text/etc)
-        or actuate solenoid to fill Water
+        void digitalWrite(int pin, int value);//<-or actuate solenoid to fill Water
         if Water solenoid true (filling)
             repeat until Water sensor State true
+            record occurrence(s)
 else if Water sensor State true (full)
     recheck in 1 hour
+    record occurrence(s)
+repeat until stop
+
+
+
