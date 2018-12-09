@@ -21,13 +21,13 @@ const unsigned int TIMECOUNT = 3600000;
 /*MAIN<------------------------------------>MAIN*/
 int main(){
     //variables
-    int priorityNum, setupNum. pinOne, pinTwo;
+    int priorityNum, setupNum, pinOne, pinTwo;
     //initialize data file object
     ofstream dataFile;
 
     //if not signed in as root, exit
     if (geteuid() != 0){
-        fprintf(stderr, "ladder: Need to be root to run (sudo?)\n");
+        fprintf(stderr, "Need to be root to run (sudo?)\n");
         exit(0);
     }
 
